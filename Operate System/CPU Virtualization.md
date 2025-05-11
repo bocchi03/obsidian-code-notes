@@ -18,7 +18,7 @@
 
 **示例**：在运行一个文本编辑器（如 Vim）时，操作系统为其创建一个进程，分配独立的内存空间和 CPU 时间片。
 
-![image-20250504180019647](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504180019647.png)
+![image-20250504180019647](../image/image-20250504180019647.png)
 
 ---
 
@@ -86,7 +86,7 @@ int main() {
   - 运行 → 阻塞：等待 I/O。
   - 阻塞 → 就绪：I/O 完成。
 
-**图示**：![image-20250504180150600](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504180150600.png)
+**图示**：![image-20250504180150600](../image/image-20250504180150600.png)
 
 **实际应用**：Linux 内核使用 `task_struct` 结构跟踪进程状态，通过 `state` 字段表示（TASK_RUNNING、TASK_INTERRUPTIBLE 等）。
 
@@ -301,7 +301,7 @@ int main() {
 
 **示例**：Linux 的 `schedule()` 函数处理上下文切换，调用 `context_switch()` 更新寄存器和内存状态。
 
-![image-20250504180650710](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504180650710.png)
+![image-20250504180650710](../image/image-20250504180650710.png)
 
 ---
 
@@ -378,7 +378,7 @@ int main() {
 **示例**：
 - 任务 A（10ms）、B（20ms）、C（5ms）按顺序到达，FIFO 执行顺序为 A→B→C，周转时间较高。
 
-![image-20250504181151028](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504181151028.png)
+![image-20250504181151028](../image/image-20250504181151028.png)
 
 ---
 
@@ -397,7 +397,7 @@ int main() {
 **示例**：
 - 任务 A（10ms）、B（5ms）、C（20ms）同时到达，SJF 顺序为 B→A→C，优化周转时间。
 
-![image-20250504181224073](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504181224073.png)
+![image-20250504181224073](../image/image-20250504181224073.png)
 
 ---
 
@@ -416,7 +416,7 @@ int main() {
 **示例**：
 - A（10ms）运行中，B（5ms）到达，STCF 暂停 A，运行 B。
 
-![image-20250504181305238](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504181305238.png)
+![image-20250504181305238](../image/image-20250504181305238.png)
 
 ---
 
@@ -447,7 +447,7 @@ int main() {
 **示例**：
 - 时间片 5ms，任务 A（10ms）、B（10ms），RR 顺序为 A(5)→B(5)→A(5)→B(5)。
 
-![image-20250504181612853](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504181612853.png)
+![image-20250504181612853](../image/image-20250504181612853.png)
 
 ---
 
@@ -459,7 +459,7 @@ int main() {
 **示例**：
 - 任务 A 执行 I/O，调度器切换到任务 B，避免 CPU 空闲。
 
-![image-20250504181727908](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504181727908.png)
+![image-20250504181727908](../image/image-20250504181727908.png)
 
 ---
 
@@ -504,7 +504,7 @@ int main() {
 **目标**：
 - 自适应调度，优化短任务的响应时间，同时保证长任务公平性。
 
-![image-20250504181935249](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504181935249.png)
+![image-20250504181935249](../image/image-20250504181935249.png)
 
 ---
 
@@ -674,7 +674,7 @@ for (process in process_list) {
 - **同步**：保护共享数据结构。
 - **缓存亲和度**：减少进程迁移的缓存失效。
 
-![image-20250504182146500](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504182146500.png)
+![image-20250504182146500](../image/image-20250504182146500.png)
 
 ---
 
@@ -721,9 +721,9 @@ for (process in process_list) {
 
 **示例**：早期 Linux 调度器使用单一队列。
 
-![image-20250504182417811](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504182417811.png)
+![image-20250504182417811](../image/image-20250504182417811.png)
 
-![image-20250504182245845](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504182245845.png)
+![image-20250504182245845](../image/image-20250504182245845.png)
 
 ---
 
@@ -745,9 +745,9 @@ for (process in process_list) {
 
 **示例**：Linux CFS 使用多队列并结合负载平衡。
 
-![image-20250504182434412](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504182434412.png)
+![image-20250504182434412](../image/image-20250504182434412.png)
 
-![image-20250504182501101](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504182501101.png)
+![image-20250504182501101](../image/image-20250504182501101.png)
 
 ---
 

@@ -83,6 +83,7 @@
        
        ![image-20250421201705104](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250421201705104.png)
      - **电缆调制解调器**：
+       
        - 使用有线电视网络，带宽10-100Mbps。
        - 共享带宽：邻居使用越多，速度越慢。
        - 例子：美国Comcast提供电缆宽带。
