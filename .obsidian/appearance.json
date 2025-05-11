@@ -1,0 +1,11 @@
+{
+  "enabledCssSnippets": [
+    "GitHub (2)"
+  ],
+  "cssTheme": "GitHub Theme",
+  "theme": "system",
+  "monospaceFontFamily": "Consolas",
+  "baseFontSize": 16,
+  "accentColor": "#cb6fec",
+  "showRibbon": false
+}

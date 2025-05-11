@@ -1,0 +1,196 @@
+{
+  "main": {
+    "id": "0848c5d967d3d506",
+    "type": "split",
+    "children": [
+      {
+        "id": "65882774c28144a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7c26d723cdd168cd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "LeeCoder/week1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "week1"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a811d467afb7bcef",
+    "type": "split",
+    "children": [
+      {
+        "id": "e6debb2cd7e59f2b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2ec8e81918e65c28",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#twosum",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "bacf98da49eceaa4",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
+          {
+            "id": "600fbc185907e37f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 299.5
+  },
+  "right": {
+    "id": "6d973fe6e59037b3",
+    "type": "split",
+    "children": [
+      {
+        "id": "46ef53b755f3718d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3f85d5262b6ebd2e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "LeeCoder/week1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "week1 的反向链接列表"
+            }
+          },
+          {
+            "id": "a40ba2561e23cbd7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "OS.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "OS 的出链列表"
+            }
+          },
+          {
+            "id": "ad676e1f2dc852c7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "6d491f546f8c2bc2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "LeeCoder/week1.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "week1 的大纲"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "7c26d723cdd168cd",
+  "lastOpenFiles": [
+    "OS.md",
+    "structure.md",
+    "Network.md",
+    "Algorithm.md",
+    "LeeCoder/week1.md",
+    "temp/cpp-codeblock.md",
+    "未命名.canvas",
+    "未命名.md",
+    "LeeCoder",
+    "temp",
+    "新建文件夹",
+    "cpp-codeblock.md",
+    "未命名 1.md",
+    "快速排序.md",
+    "1.md",
+    "未命名 1.canvas",
+    "2025-03-13.md",
+    "欢迎.md",
+    "OS"
+  ]
+}

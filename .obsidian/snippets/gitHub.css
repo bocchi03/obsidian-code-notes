@@ -1,0 +1,40 @@
+/* github-codeblock.css */
+/* GitHub-style code block for Obsidian */
+
+.markdown-preview-view pre code {
+  display: block;
+  padding: 1em;
+  background-color: #f6f8fa;
+  color: #24292e;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: auto;
+  border-radius: 6px;
+  border: 1px solid #d1d5da;
+  white-space: pre;
+}
+
+/* Inline code */
+.markdown-preview-view code:not(pre code) {
+  background-color: rgba(27, 31, 35, 0.05);
+  color: #e01e5a;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.95em;
+}
+
+/* Optional: style for line numbers if using plugins */
+.markdown-preview-view pre {
+  position: relative;
+}
+
+/* Scroll bar for overflow code */
+.markdown-preview-view pre code::-webkit-scrollbar {
+  height: 8px;
+}
+
+.markdown-preview-view pre code::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 4px;
+}

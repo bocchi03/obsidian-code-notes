@@ -1,0 +1,121 @@
+/* 编辑模式 + 预览模式统一 GitHub 风格代码块 */
+
+/* 预览模式 */
+.markdown-preview-view pre code,
+.markdown-reading-view pre code {
+  display: block;
+  padding: 1em;
+  background-color: #f6f8fa !important;
+  color: #24292e !important;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: auto;
+  border-radius: 6px;
+  border: 1px solid #d1d5da;
+  white-space: pre;
+}
+
+/* 编辑模式 - 块级代码 */
+.cm-s-obsidian span.cm-inline-code,
+.cm-s-obsidian .HyperMD-codeblock,
+.cm-s-obsidian .cm-inline-code {
+  background-color: #f6f8fa !important;
+  color: #24292e !important;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 14px;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  padding: 0.2em 0.4em;
+}
+
+/* 编辑模式 - 多行代码块内部 */
+.cm-s-obsidian .HyperMD-codeblock {
+  padding: 1em;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  display: block;
+}
+
+/* === GitHub 代码高亮风格（适用于编辑和预览）=== */
+
+/* 公共样式 */
+code, pre, .cm-s-obsidian span.cm-inline-code {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+}
+
+/* 预览模式代码块样式 */
+.markdown-preview-view pre code,
+.markdown-reading-view pre code {
+  display: block;
+  padding: 1em;
+  background: #f6f8fa;
+  color: #24292e;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: auto;
+  border-radius: 6px;
+  border: 1px solid #d1d5da;
+}
+
+/* 编辑模式代码块样式 */
+.cm-s-obsidian .HyperMD-codeblock,
+.cm-s-obsidian .cm-inline-code {
+  background: #f6f8fa !important;
+  color: #24292e !important;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  padding: 0.5em;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 语法高亮颜色（GitHub Prism 主题兼容） */
+.cm-keyword,
+.token.keyword {
+  color: #569cd6;
+}
+
+.cm-def,
+.token.function {
+  color: #000000;
+}
+
+.cm-variable,
+.token.variable {
+  color: #030405;
+}
+
+.cm-string,
+.token.string {
+  color: #ce9178;
+}
+
+.cm-number,
+.token.number {
+  color: #569cd6;
+}
+
+.cm-comment,
+.token.comment {
+  color: #6a9955;
+  font-style: italic;
+}
+
+.cm-operator,
+.token.operator {
+  color: #569cd6;
+}
+
+/* inline code */
+.markdown-preview-view code:not(pre code),
+.markdown-reading-view code:not(pre code),
+.cm-inline-code {
+  background-color: #2d2d2d !important;
+  color: #d4d4d4 !important;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+}
