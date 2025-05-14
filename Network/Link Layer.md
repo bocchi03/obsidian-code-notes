@@ -56,7 +56,7 @@
        - 例：数据10110，奇校验添加0（总数1为3，奇数）；偶校验添加1（总数1为4，偶数）。
        - 局限：只能检测奇数个比特错误。
        
-       ![image-20250416193328938](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250416193328938.png)
+       ![image-20250416193328938](../image/image-20250416193328938.png)
      - **二维奇偶校验**：
        
        - 数据按矩阵排列，计算每行和每列的奇偶校验位。
@@ -70,7 +70,7 @@
        - 可检测1-3比特错误，定位单比特错误。
        - 应用：早期存储器、简单链路协议。
        
-       ![image-20250416193233345](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250416193233345.png)
+       ![image-20250416193233345](../image/image-20250416193233345.png)
   2. **校验和（Checksum）**：
      
      - 将数据按16位分组，求和（进位加到低位），取反得到校验和。
@@ -105,7 +105,7 @@
        - 硬件实现高效（移位寄存器）。
      - 应用：以太网（CRC-32）、WiFi、SATA、USB。
      
-     ![image-20250416193529592](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250416193529592.png)
+     ![image-20250416193529592](../image/image-20250416193529592.png)
 - **错误纠正技术**：
   
   - **前向纠错（FEC，Forward Error Correction）**：
@@ -169,7 +169,7 @@
          - 效率：最大吞吐量约36.8%（冲突概率降低）。
        - 应用：早期卫星网络、无线传感器网络。
        
-       ![image-20250416193738434](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250416193738434.png)
+       ![image-20250416193738434](../image/image-20250416193738434.png)
      - **CSMA（Carrier Sense Multiple Access）**：
        - **原理**：发送前监听信道（载波侦听），空闲时发送。
        - **CSMA/CD（Collision Detection）**：
@@ -180,7 +180,7 @@
          - 应用：早期以太网（10BASE5、10BASE2）。
          - 现代以太网（全双工交换机）无需CSMA/CD。
          
-         ![image-20250416194008488](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250416194008488.png)
+         ![image-20250416194008488](../image/image-20250416194008488.png)
        - **CSMA/CA（Collision Avoidance）**：
          - 无法实时检测冲突（如无线电信号延迟），通过避免冲突提高效率。
          - 机制：
@@ -308,7 +308,7 @@
     - **数据**：46-1500字节，包含网络层数据，不足46字节填充（Padding）。
     - **CRC**：4字节，错误检测（CRC-32）。
     
-    ![image-20250416194513233](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250416194513233.png)
+    ![image-20250416194513233](../image/image-20250416194513233.png)
   - **图示**：
     ```c
     [前导码 7B | SFD 1B | 目标MAC 6B | 源MAC 6B | 类型 2B | 数据 46-1500B | CRC 4B]
@@ -425,7 +425,7 @@
        - **例**：交换机A到B的Trunk端口，承载VLAN 10、20、30的Tagged帧。
        - **应用**：交换机互联、路由器连接。
   
-  ![image-20250416201444064](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250416201444064.png)
+  ![image-20250416201444064](../image/image-20250416201444064.png)
   
 - **实际案例**：
   

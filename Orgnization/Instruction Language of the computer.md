@@ -274,7 +274,7 @@ exit:
   - `jr $ra`：返回调用者。
 - **栈操作**：
   - 使用栈保存临时变量和寄存器，栈由`$sp`（栈指针）管理，栈向下增长（压栈时`$sp`减小，弹栈时`$sp`增加）。
-  - ![image-20250504113340230](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504113340230.png)
+  - ![image-20250504113340230](../image/image-20250504113340230.png)
 
 **C代码示例**：
 ```c
@@ -315,7 +315,7 @@ MIPS寄存器分为：
   - 用途：动态分配内存（如C的`malloc`或C++的`new`）。
   - 特点：由程序员或运行时系统管理，生命周期灵活。
   - 示例：动态数组或对象存储在堆上。
-- ![image-20250504113458888](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504113458888.png)
+- ![image-20250504113458888](../image/image-20250504113458888.png)
 
 **栈操作示例**：
 ```asm
@@ -400,7 +400,7 @@ beq $t0, $t1, L1  # PC相对：跳转到 L1
 j target           # 伪直接：跳转到 target
 ```
 
-![image-20250504123542472](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504123542472.png)
+![image-20250504123542472](../image/image-20250504123542472.png)
 
 #### 汇编器如何翻译机器语言
 
@@ -501,7 +501,7 @@ try_lock:
 - **机制**：动态链接器解析符号，加载库代码。
 - **示例**：C程序调用`printf`，运行时加载`libc.so`。
 
-![image-20250504123630541](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504123630541.png)
+![image-20250504123630541](../image/image-20250504123630541.png)
 
 #### Java程序启动
 - **流程**：
@@ -514,7 +514,7 @@ try_lock:
 - 现代编译器（如GCC、Clang）集成多种优化技术。
 - JVM的JIT编译结合了解释和编译的优点，适用于动态语言。
 
-![image-20250504123716947](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250504123716947.png)
+![image-20250504123716947](../image/image-20250504123716947.png)
 
 ---
 

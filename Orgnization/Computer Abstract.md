@@ -119,7 +119,7 @@
        - 过程：源代码 -> 汇编代码 -> 机器代码。
        - 示例：GCC 编译器将 C 代码翻译为 x86 指令。
        
-       ![image-20250503174124224](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250503174124224.png)
+       ![image-20250503174124224](../image/image-20250503174124224.png)
      - **操作系统 (OS)**：
        - 管理硬件资源（CPU、内存、I/O）。
        - 提供服务（如文件系统、进程管理）。
@@ -303,7 +303,7 @@
     \text{CPU Time} = \frac{\text{指令数} \times \text{CPI}}{\text{时钟频率}}
     ]$$
     
-  - ![image-20250503210301114](C:\Users\朱仲艺\AppData\Roaming\Typora\typora-user-images\image-20250503210301114.png)
+  - ![image-20250503210301114](../image/image-20250503210301114.png)
   
 - **影响性能的因素**：
   1. **算法**：
