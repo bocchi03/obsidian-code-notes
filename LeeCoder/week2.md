@@ -61,3 +61,45 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
     return l2;
     }
 ```
+
+
+### [160. 相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
+```cpp
+// False
+ListNode *L1 = headA;  
+ListNode *L2 = headB;  
+int cnt = 0;  
+while(L1 && L2){  
+    if(!L1->next && cnt == 0){  
+        L1->next = headB;  // 修改了链表物理结构，无交点会形成环
+        cnt++;             
+    }  
+    if(!L2->next)  
+        L2->next = headA;  //同理
+    if(L1 == L2)  
+        return L1;  
+    L1 = L1->next;  
+    L2 = L2->next;  
+}  
+return NULL;
+
+// True
+ListNode *L1 = headA;  
+ListNode *L2 = headB;  
+int cnt = 0;  
+while(L1 && L2){  
+    if(L1 == L2)  
+        return L1;  
+    L1 = L1->next;   // 只改变逻辑结构，当为空时才改变
+    L2 = L2->next;  
+    if(!L1 && !cnt){  
+        L1 = headB;  
+        cnt++;  
+    }  
+    if(!L2)  
+        L2 = headA;  
+}  
+return NULL;
+```
+>[!warning]
+>注意链表结构（可能成环），遍历链表时尽量不改变链表物理结构
