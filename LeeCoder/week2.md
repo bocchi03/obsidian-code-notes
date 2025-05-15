@@ -27,6 +27,7 @@ return res;
 
 
 ### [141. 环形链表](https://leetcode.cn/problems/linked-list-cycle/)
+- 快慢指针
 ```cpp
 while(fast && fast->next){  
     fast = fast->next->next;  
@@ -39,8 +40,27 @@ return false;
 >[!warning]
 >空指针引用``fast->next``不能为空，否则``fast->next->next``为空指针引用
 
+### [83. 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
+- 快慢指针+链表
+```cpp
+if(!head || !head->next)
+    return head;
+ListNode *fast = head->next;  // 快慢指针
+ListNode *slow = head;
+while(fast){
+    if(fast->val == slow->val){
+        slow->next = fast->next;
+        fast = slow->next;     // 保证fast在slow前面
+    }else{
+        slow = slow->next;
+        fast = fast->next;
+    }
+}
+    return head;
+}
+```
 ### [21. 合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/)
-
+- 双指针
 ```cpp
 ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
     // 递归终止条件
@@ -103,3 +123,43 @@ return NULL;
 ```
 >[!warning]
 >注意链表结构（可能成环），遍历链表时尽量不改变链表物理结构
+
+### [203. 移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/)
+- 双指针
+```cpp
+//False
+ListNode *cur = head;  
+ListNode *pre = head;  
+while(cur){  
+    if(cur->val == val){  
+        pre->next = cur->next;  
+        cur = cur->next;  
+    }else{  
+        pre = cur;  
+        cur = cur->next;  
+    }  
+}  
+return head;    // 头节点一直没动，pre只能改变head结构无法移动或删除
+
+//True
+ while(head && head->val == val){  // 处理符合条件的头节点
+        head = head->next;  
+    }  
+    if(!head)  
+        return nullptr;     //处理空节点
+    ListNode *cur = head;  
+    ListNode *pre = head;  
+    while(cur){  
+        if(cur->val == val){  
+            pre->next = cur->next;  
+            cur = cur->next;  
+        }else{  
+            pre = cur;  
+            cur = cur->next;  
+        }  
+    }  
+    return head;  
+}
+```
+>[!warning]
+>指针相等只是指向同一节点，无法更改原指针
