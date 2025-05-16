@@ -2,7 +2,7 @@
 - 迭代+双指针
 ```cpp
 ListNode* cur = head;
-ListNode* pre = nullptr;
+ListNode* pre = nullptr;  // 头节点指向空节点
 while(cur){
     ListNode* next = cur->next;
     cur->next = pre;
@@ -163,3 +163,58 @@ return head;    // 头节点一直没动，pre只能改变head结构无法移动
 ```
 >[!warning]
 >指针相等只是指向同一节点，无法更改原指针
+
+### [125. 验证回文串](https://leetcode.cn/problems/valid-palindrome/)
+- 双指针
+```cpp
+// False
+vector<char> temp;  
+    for(auto c : s){    // 判断是否为字母数字
+        if(c >= 65 && c < 91)  
+            temp.push_back(c + 32);  
+        if(c >= 97 && c < 123 )  
+            temp.push_back(c);  
+        if(c >= 48 && c <= 57)  
+            temp.push_back(c);  
+    }  
+    if(temp.empty())  
+        return true;  
+    int left = 0, right = temp.size() - 1;  
+    while(left != right){  
+        if(temp[left] != temp[right])  
+            return false;  
+        left++;  
+        right--;  
+    }  
+    return true;  
+}
+
+// True
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int left = 0, right = s.size() - 1;
+        while(left < right){
+            while(left < right && !isalnum(s[left])) left++;
+            while(left < right && !isalnum(s[right])) right--;
+            if(tolower(s[left]) != tolower(s[right])) 
+                return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+};
+```
+>[!tip]
+>- 双指针判断边界 (left < right)
+>- isalnum()判断是否为字母数字（isdigit()判断数字， isalpha()判断字母）
+>- tolowe(), toupper()
+
+
+
+>[!note]
+>- 快慢指针：解决链表相交，倒数第k个数
+>- 双指针边界判断用  (left < right)
+
+ 

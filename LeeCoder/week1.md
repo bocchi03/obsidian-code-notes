@@ -102,7 +102,7 @@ unordered_map<int, int> dire;
 for(int i = 0; i < nums.size(); i++)  
     temp[i + 1] = nums[i] + temp[i];  
   
-dire[0]++;  
+dire[0]++;  // 第一项和为0
 // 数组基准从[1]开始
 for(int i = 1; i < temp.size(); i++){  
     int diff = temp[i] - k;  
