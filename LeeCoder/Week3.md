@@ -106,3 +106,57 @@ private:
     stack<int> input, output;  
 };
 ```
+
+### [496. 下一个更大元素 I](https://leetcode.cn/problems/next-greater-element-i/)
+- 单调栈
+```cpp
+vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {  
+    stack<int> stk;  
+    unordered_map<int, int> next_greater;  // 存每个元素的下一个更大元素  
+          // Step 1: 用单调栈处理nums2  
+    for (int num : nums2) {  
+        while (!stk.empty() && stk.top() < num) {  
+            next_greater[stk.top()] = num;  // num是栈顶元素的下一个更大值  
+            stk.pop();  
+        }  
+        stk.push(num);   
+    }  
+    // 剩余元素没有下一个更大值，默认为-1（已在map初始化时处理）  
+  
+    // Step 2: 直接查询结果  
+    vector<int> res;  
+    for (int num : nums1) {  
+        res.push_back(next_greater.count(num) ? next_greater[num] : -1);  
+    }  
+    return res;  
+}
+```
+>[!note]
+>用nums2进行单调栈模拟，若当前元素>栈顶元素则有对应下一个更大元素
+
+### [844. 比较含退格的字符串](https://leetcode.cn/problems/backspace-string-compare/)
+```cpp
+// False
+class Solution {  
+public:  
+    bool backspaceCompare(string s, string t) {  
+        stack<char> stk1, stk2;  
+        for(char c : s){  
+            if(c == '#')  
+                if(!stk1.empty())   // if作用范围错误
+                    stk1.pop();  
+                else  
+                    stk1.push(c);  
+        }  
+  
+        for(char c : t){  
+            if(c == '#')  
+                if(!stk2.empty())    // 同
+                    stk2.pop();  
+                else  
+                    stk2.push(c);  
+        }  
+        return stk2 == stk1;  
+    }  
+};
+```

@@ -334,9 +334,9 @@
     ```c
     // flag is initialized to 0 (unlocked)
     void lock(int *flag) {
-        while (test_and_set(flag, 1) == 1)
+        while (test_and_set(flag, 1) == 1)  // acquire the lock
             ; // spin (do nothing, just loop)
-    }
+    }        
     
     void unlock(int *flag) {
         *flag = 0;
@@ -370,9 +370,11 @@
   - **一对原子指令**:
     - **Load-Linked (LL)**: 从内存加载一个值。
     - **Store-Conditional (SC)**: 尝试将一个值存储回之前通过 LL 加载的内存地址。只有在该地址的内容自 LL 以来没有被其他处理器修改过的情况下，SC 才会成功。
+    
+    ![image-20250520192809270](../image/image-20250520192809270.png)
   - **优点**: 避免了CAS中的ABA问题（一个值从A变为B再变回A，CAS会误认为没有变化）。LL/SC通过监视内存位置的修改来实现更强的原子性。
   - **常用于**: MIPS、PowerPC、ARM等架构。
-
+  
 - **28.11 获取并增加 (Fetch-and-Add)**:
   - **硬件原子指令**: `int fetch_and_add(int *mem_addr, int increment_val)`
     ```c
@@ -381,9 +383,12 @@
     *mem_addr = old_val + increment_val;
     return old_val;
     ```
+  
+  ![image-20250520192949422](../image/image-20250520192949422.png)
+
   - 原子地读取 `*mem_addr` 的当前值，将其增加 `increment_val`，并返回旧值。
   - 非常适合实现原子计数器等。
-
+  
 - **28.12 自旋过多：怎么办**: 当自旋锁的自旋成为性能瓶颈时，需要更优的策略。
 
 - **28.13 简单方法：让出来吧，宝贝 (Yield)**:
@@ -407,8 +412,48 @@
     - 当线程尝试获取锁失败时，不进行自旋（或只短暂自旋）。
     - 将该线程加入一个与该锁关联的等待队列，并使其进入休眠状态（阻塞）。
     - 当锁被释放时，从等待队列中唤醒一个（或多个）线程，使其尝试获取锁。
+  
+  ```c++
+  typedef struct lock_t {
+  	int flag;
+  	int guard;
+  	queue_t *q;
+  } lock_t;
+  
+  void lock_init(lock_t *m) {
+  	m->flag = 0;
+  	m->guard = 0;
+  	queue_init(m->q);
+  }
+  
+  void lock(lock_t *m) {
+  	while (TestAndSet(&m->guard, 1) == 1)
+      ; //acquire guard lock by spinning
+  	if (m->flag == 0) {
+  		m->flag = 1; // lock is acquired
+  		m->guard = 0;
+  	} else {
+  		queue_add(m->q, gettid());
+  		m->guard = 0;
+  		park();
+  	}
+  }
+  
+  void unlock(lock_t *m) {
+  	while (TestAndSet(&m->guard, 1) == 1)
+  		; //acquire guard lock by spinning
+  	if (queue_empty(m->q))
+  		m->flag = 0; // let go of lock; no one wants it
+  	else
+  		unpark(queue_remove(m->q)); // hold lock (for next thread!)
+  	m->guard = 0;
+  }
+  ```
+  
+  
+  
   - **OS支持**: 通常需要操作系统内核的支持，例如Linux中的 `futex` (Fast Userspace Mutex)。`futex` 是一种高效的机制，允许在无竞争时完全在用户空间操作锁，仅在发生竞争时才陷入内核进行线程排队和唤醒。
-
+  
 - **28.15 不同操作系统，不同实现**: Windows有 `CriticalSection` 对象、`Mutex` 对象；Linux有 `futex`；macOS和iOS有 `os_unfair_lock` 等。它们在实现细节、性能特性和公平性保证上可能有所不同。
 
 - **28.16 两阶段锁 (Two-Phase Locking - 2PL)**:
@@ -702,7 +747,7 @@ sem_t my_semaphore;
   
   // Thread function:
   // sem_wait(&binary_sem);
-  // // Critical section
+  // // Critical section 
   // sem_post(&binary_sem);
   
   // In main, after join: sem_destroy(&binary_sem);
@@ -715,6 +760,30 @@ sem_t my_semaphore;
   - 例如，一个线程可以等待一个初始化为0的信号量（P(sem_cond)），另一个线程在条件满足时 V(sem_cond) 来唤醒它。
   - 然而，信号量没有与互斥锁的原子释放/获取的直接关联，需要程序员手动管理互斥。
 
+  ```c++
+  sem_t s;
+  
+  void *
+  child(void *arg) {
+      printf("child\n");
+  	sem_post(&s); // signal here: child is done
+  	return NULL;
+  }
+  
+  int
+  main(int argc, char *argv[]) {
+  	sem_init(&s, 0, X); // what should X be?
+  	printf("parent: begin\n");
+  	pthread_t c;
+  	Pthread_create(c, NULL, child, NULL);
+  	sem_wait(&s); // wait here for child
+  	printf("parent: end\n");
+  	return 0;
+  }
+  ```
+  
+  
+  
 - **31.4 生产者/消费者（有界缓冲区）问题 (使用信号量)**:
   - **通常需要三个信号量**:
     - `mutex`: 二值信号量，初始化为1，用于保护对缓冲区的互斥访问。
@@ -742,13 +811,57 @@ sem_t my_semaphore;
 
 - **31.5 读者—写者锁 (Reader-Writer Locks)**:
   - **允许多个读者并发访问**: 当没有写者时，任意数量的读者可以同时读取共享数据。
+  
   - **写者互斥访问**: 当一个写者正在写入时，其他所有读者和写者都必须等待。写者之间也必须互斥。
+  
   - **实现**: 可以使用信号量和互斥锁实现。通常涉及一个计数器来跟踪活动读者的数量，并使用信号量来控制读者和写者的进入。
+    
+    ```c++
+    typedef struct _rwlock_t {
+    	sem_t lock; // binary semaphore (basic lock)
+    	sem_t writelock; // used to allow ONE writer or MANY readers
+    	int readers; // count of readers reading in critical section
+    } rwlock_t;
+    
+    void rwlock_init(rwlock_t *rw) {
+    	rw->readers = 0;
+    	sem_init(&rw->lock, 0, 1);
+    	sem_init(&rw->writelock, 0, 1);
+    }
+    
+    void rwlock_acquire_readlock(rwlock_t *rw) {
+    	sem_wait(&rw->lock);
+    	rw->readers++;
+    	if (rw->readers == 1)
+    		sem_wait(&rw->writelock); // first reader acquires writelock
+    		sem_post(&rw->lock);
+    }
+    
+    void rwlock_release_readlock(rwlock_t *rw) {
+    	sem_wait(&rw->lock);
+    	rw->readers--;
+    	if (rw->readers == 0)
+    		sem_post(&rw->writelock); // last reader releases writelock
+    		sem_post(&rw->lock);
+    }
+    
+    void rwlock_acquire_writelock(rwlock_t *rw) {
+    	sem_wait(&rw->writelock);
+    }
+    
+    void rwlock_release_writelock(rwlock_t *rw) {
+    	sem_post(&rw->writelock);
+    }
+    ```
+    
+    
+    
     - `rw_mutex`: 控制对共享数据写访问的信号量 (或写者之间，以及写者与第一/最后一个读者之间的同步)。
     - `mutex`: 保护读者计数器的互斥锁。
     - `read_count`: 当前读者数量。
+    
   - **复杂性**: 需要处理读者优先或写者优先的策略，以避免饥饿。
-
+  
 - **31.6 哲学家就餐问题 (Dining Philosophers Problem)**:
   - **经典死锁和饥饿问题**: N个哲学家围坐圆桌，每人面前一盘意大利面，每两个哲学家之间放一把叉子（共N把）。哲学家要么思考，要么进餐。进餐需要同时拿起左右两边的叉子。
   - **问题**: 如果所有哲学家同时拿起左手边的叉子，然后等待右手边的叉子，就会发生死锁——每个人都持有部分资源并等待其他人持有的资源。
