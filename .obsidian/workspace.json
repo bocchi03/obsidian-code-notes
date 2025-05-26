@@ -35,7 +35,8 @@
               "title": "Week2"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -187,10 +188,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "46dcc8b892489189",
+  "active": "129ddda8ea7eab2f",
   "lastOpenFiles": [
-    "LeeCoder/Week2.md",
     "LeeCoder/Week3.md",
+    "LeeCoder/Week2.md",
     "LeeCoder/Week1.md",
     "Network/Link Layer.md",
     "Network/Application Layer.md",

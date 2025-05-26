@@ -209,7 +209,7 @@ public:
 >[!tip]
 >- 双指针判断边界 (left < right)
 >- isalnum()判断是否为字母数字（isdigit()判断数字， isalpha()判断字母）
->- tolowe(), toupper()
+>- tolower(), toupper()
 
 
 

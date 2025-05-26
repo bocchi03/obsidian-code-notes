@@ -160,3 +160,94 @@ public:
     }  
 };
 ```
+
+
+### [155. 最小栈](https://leetcode.cn/problems/min-stack/)
+- 双栈
+```cpp
+class MinStack {  
+public:  
+    MinStack() {  
+  
+    }  
+  
+    void push(int val) {  
+        if(Min.empty() || val <= Min.top())  //Min维持最小元素
+            Min.push(val);  
+        stk.push(val);  
+    }  
+  
+    void pop() {  
+        if(stk.top() == Min.top())  
+            Min.pop();  
+        if(!stk.empty())  
+            stk.pop();  
+    }  
+  
+    int top() {  
+        return stk.top();  
+    }  
+  
+    int getMin() {  
+        return Min.top();  
+    }  
+  
+private:  
+    stack<int> stk;  
+    stack<int> Min;  
+};
+```
+>[!note]
+>联想Stack   需要撤回(pop())最小值后还是最小值
+
+### [394. 字符串解码](https://leetcode.cn/problems/decode-string/)
+- 栈+括号匹配
+```cpp
+class Solution {  
+public:  
+    string decodeString(string s) {  
+        stack<char> stk;  
+        string res;  
+        for(auto c : s){  
+            if(c == ']'){  
+                string tem;  
+                while(stk.top() != '['){    //提取括号内的内容
+                    tem.push_back(stk.top());  
+                    stk.pop();  
+                }  
+                stk.pop();  
+                std::reverse(tem.begin(), tem.end());  
+                
+                string nu;  
+                while(!stk.empty() && isdigit(stk.top())){  //提取次数k
+                    nu += stk.top();  
+                    stk.pop();  
+                }  
+                std::reverse(nu.begin(), nu.end());  
+                int n = stoi(nu);    
+                
+                string t = tem;  
+                for(int i = n - 1; i >0; i--)    //重复内容
+                    tem += t;  
+                
+                for(char q : tem)     //压回栈
+                    stk.push(q);  
+            }else  
+                stk.push(c);  
+        }  
+        
+        while(!stk.empty()){   //从栈中提取res
+            res += stk.top();  
+            stk.pop();  
+        }  
+        std::reverse(res.begin(), res.end());  
+        return res;  
+    }  
+};
+```
+>[!note]
+>提取数字可能不止一位数 ， stoi()-> string to int
+
+
+>[!tip]
+>要用到之前元素， 返回之前元素， 撤销操作， 符号匹配 -> stack
