@@ -118,3 +118,50 @@ public:
 ```
 >[!warning]
 >使用数组时注意大小-> 是否使用空行？
+
+
+### [153. 寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
+- 二分查找
+```cpp
+class Solution {  
+public:  
+    int findMin(vector<int>& nums) {  
+        int left = 0, right = nums.size() - 1;  
+        if(nums[left] < nums[right])  // 数组正常无旋转
+            return nums[left];  
+        
+        while(left <= right){  
+            int mid = left + (right - left) / 2;  
+            if(nums[mid] > nums[right]){   // 最小值最右半部分  
+                left = mid + 1;            //  缩小范围
+            }else if(nums[mid] < nums[right])  // 最小值为right或right左边
+                right = mid;  
+            else  
+                return nums[left];  
+        }  
+        return nums[left];  
+    }  
+};
+```
+>[!note]
+>二分查找可适用于局部单调性，一次缩小一半范围
+
+### [852. 山脉数组的峰顶索引](https://leetcode.cn/problems/peak-index-in-a-mountain-array/)
+- 二分查找
+```cpp
+class Solution {  
+public:  
+    int peakIndexInMountainArray(vector<int>& arr) {  
+        int left = 0, right = arr.size() - 1;  
+        while (left < right){  
+            int mid = left + (right - left) / 2;  
+            if(arr[mid] > arr[mid + 1]){  
+                right = mid;  
+            }else if(arr[mid] < arr[mid + 1]){  
+                left = mid + 1;  
+            }  
+        }  
+        return left;  
+    }  
+};
+```
