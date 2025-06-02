@@ -39,6 +39,27 @@ public:
 >- 查找最后一个出现位置(命中后继续右移left)
 >- 查找第一个大于target值
 
+
+### [69. x 的平方根](https://leetcode.cn/problems/sqrtx/)
+- 二分查找
+```cpp
+class Solution {  
+public:  
+    int mySqrt(int x) {  
+        long left = 0, right = x;  
+        while(left <= right){  
+            long mid = left + (right - left) / 2;  
+            if(mid * mid < x)  
+                left = mid + 1;  
+            else if(mid * mid > x)  
+                right = mid - 1;  
+            else  
+                return mid;  
+        }  
+        return right;  // right值刚好为第一个比x小的值
+    }  
+};
+```
 ### [441. 排列硬币](https://leetcode.cn/problems/arranging-coins/)
 - 二分查找
 ```cpp
@@ -155,9 +176,9 @@ public:
         int left = 0, right = arr.size() - 1;  
         while (left < right){  
             int mid = left + (right - left) / 2;  
-            if(arr[mid] > arr[mid + 1]){  
+            if(arr[mid] > arr[mid + 1]){   // 递减区间
                 right = mid;  
-            }else if(arr[mid] < arr[mid + 1]){  
+            }else if(arr[mid] < arr[mid + 1]){  // 递增区间
                 left = mid + 1;  
             }  
         }  
@@ -165,3 +186,26 @@ public:
     }  
 };
 ```
+
+### [162. 寻找峰值](https://leetcode.cn/problems/find-peak-element/)
+- 二分查找
+```cpp
+class Solution {  
+public:  
+    int findPeakElement(vector<int>& nums) {  
+        int left = 0, right = nums.size() - 1;  
+        while(left < right){  
+            int mid = left + (right - left) / 2;  
+            if(nums[mid + 1] > nums[mid])  // 峰值在右
+                left = mid + 1;  
+            else  
+                right = mid;      // 峰值在左
+        }  
+        return left;  
+    }  
+};
+```
+
+>[!note]
+>局部单调也可以用二分查找，如旋转数组，寻找峰值...
+>要是需要返回mid->使用闭区间，else 使用开区间

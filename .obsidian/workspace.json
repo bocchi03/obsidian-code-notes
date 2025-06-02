@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LeeCoder/Week4.md",
+                "file": "LeeCoder/Week5.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Week4"
+              "title": "Week5"
             }
           }
         ]
@@ -175,8 +175,10 @@
   },
   "active": "46dcc8b892489189",
   "lastOpenFiles": [
-    "未命名.md",
     "LeeCoder/Week4.md",
+    "LeeCoder/Week5.md",
+    "Operate System/Persistence.md",
+    "未命名.md",
     "LeeCoder/Week3.md",
     "LeeCoder/Week2.md",
     "LeeCoder/Week1.md",
@@ -207,8 +209,6 @@
     "快速排序.md",
     "1.md",
     "未命名 1.canvas",
-    "2025-03-13.md",
-    "欢迎.md",
     "OS"
   ]
 }
