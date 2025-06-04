@@ -78,3 +78,48 @@ public:
     }  
 };
 ```
+ 
+### [53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
+- 动态规划
+```cpp
+// False
+class Solution {  
+public:  
+    int maxSubArray(vector<int>& nums) {  
+        int n = nums.size();  
+        if(n == 1)  
+            return nums[0];  
+        vector<int> dp(n);  
+        dp[0] = nums[0] < 0 ? 0 : nums[0];  
+        int Miu = 0;  
+        for(int i = 1; i < n; i++){  
+            if(nums[i] < 0){    
+                Miu += nums[i];  
+                dp[i] = dp[i - 1];  
+            }else{  
+                dp[i] = max(dp[i - 1] + nums[i] + Miu, dp[i - 1]);  
+                dp[i] = max(dp[i], nums[i]);  // 加上前数组或重新开始
+                Miu = 0;  
+            }  
+        }  
+        return dp[n - 1];    // 无法处理小于0情况 
+    }  
+};
+//True
+class Solution {  
+public:  
+    int maxSubArray(vector<int>& nums) {  
+        int n = nums.size();  
+        if(n == 1)  
+            return nums[0];  
+        vector<int> dp(n);    // 以当前元素为结尾的最大子数组和
+        dp[0] = nums[0];  
+        int Ma = nums[0];  
+        for(int i = 1; i < n; i++){  
+            dp[i] = max(dp[i - 1] + nums[i], nums[i]);  
+            Ma = max(dp[i], Ma);  
+        }  
+        return Ma;  
+    }  
+};
+```
