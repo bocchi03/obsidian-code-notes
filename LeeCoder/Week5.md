@@ -123,3 +123,61 @@ public:
     }  
 };
 ```
+
+### [213. 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/)
+- 动态规划
+```cpp
+// False
+class Solution {
+public:          // 分类  抢第一间--不抢第一间
+    int rob(vector<int>& nums) {    
+        int n = nums.size();
+        return max(rober(1, n - 1, nums), rober(2, n - 2, nums) + nums[0]);
+    }
+
+public:
+    int rober(int start, int end, vector<int> &nums){
+        int n = end - start + 1;
+        if(n < 0)    
+            return 0;
+        if(n == 1)
+            return nums[start];
+        if(n == 2)
+            return max(nums[start], nums[start + 1]);
+        vector<int> dp(n);
+        dp[0] = nums[start];
+        dp[1] = max(nums[start], nums[start + 1]);
+        for(int i = 2; i < n; i++)    
+            dp[i] = max(dp[i - 1], dp[i - 2] + nums[start + i]);
+        return dp[n - 1];
+    }
+};
+
+// True
+class Solution {  
+public:  
+    int rob(vector<int>& nums) {  
+        int n = nums.size();  
+        return max(rober(1, n - 1, nums), rober(2, n - 2, nums) + nums[0]);  
+    }  
+  
+public:  
+    int rober(int start, int end, vector<int> &nums){  
+        int n = end - start + 1;  
+        if(start > end)  
+            return 0;  
+        if(n == 1)  
+            return nums[start];  
+        if(n == 2)  
+            return max(nums[start], nums[start + 1]);  
+        vector<int> dp(n);  
+        dp[0] = nums[start];  
+        dp[1] = max(nums[start], nums[start + 1]);  
+        for(int i = 2; i < n; i++)  
+            dp[i] = max(dp[i - 1], dp[i - 2] + nums[start + i]);  
+        return dp[n - 1];  
+    }  
+};
+```
+>[!note]
+>增加附加条件->分类讨论，第一间只有抢和不抢，然后其他看成非环状解决
