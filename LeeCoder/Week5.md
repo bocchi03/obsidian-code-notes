@@ -181,3 +181,55 @@ public:
 ```
 >[!note]
 >增加附加条件->分类讨论，第一间只有抢和不抢，然后其他看成非环状解决
+
+### [740. 删除并获得点数](https://leetcode.cn/problems/delete-and-earn/)
+- 动态规划
+```cpp
+class Solution {  
+public:  
+    int deleteAndEarn(vector<int>& nums) {  // 寻找最大值构建值数组
+        auto c = max_element(nums.begin(), nums.end());  
+        int n = *c;  
+        vector<int> temp(n + 1);  //  值数组
+        for(auto c : nums)  
+            temp[c] += c;  
+                                   // 转化成不能选择相邻房屋的打家劫舍问题
+        int cnt =  temp.size();  
+        if(cnt == 1)  
+            return temp[0];  
+        if(cnt == 2)  
+            return max(temp[0], temp[1]);  
+        vector<int> dp(cnt);  
+        dp[0] = temp[0];  
+        dp[1] = max(temp[0], temp[1]);  
+        for(int i = 2; i < cnt; i++)  
+            dp[i] = max(dp[i - 1], dp[i - 2] + temp[i]);  
+        return dp[cnt - 1];  
+    }  
+};
+```
+>[!summary]
+>打家劫舍变体，由删除相邻值进行联想
+
+### [55. 跳跃游戏](https://leetcode.cn/problems/jump-game/)
+- 动态规划
+```cpp
+class Solution {  
+public:  
+    bool canJump(vector<int>& nums) {  
+        int n = nums.size();  
+        if(n == 1)  
+            return true;  
+        vector<int> dp(n);  
+        dp[0] = nums[0];  
+        for(int i = 1; i < n; i++){  
+            if(i > dp[i - 1])  
+                return false;  
+            dp[i] = max(dp[i - 1], i + nums[i]);  //转移方程
+            if(dp[i] >= n - 1)     //dp[i]->当前i位置能到的最远距离
+                return true;  
+        }  
+        return false;  
+    }  
+};
+```
