@@ -156,7 +156,7 @@ public:
 class Solution {  
 public:  
     int minDepth(TreeNode* root) {  
-        if(root == nullptr)     // 左右子树可能为0
+        if(root == nullptr)     // 左右子树可能为nullptr
             return 0;  
         if(root->left == nullptr)  
             return 1 + minDepth(root->right);  
