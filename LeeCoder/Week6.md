@@ -243,6 +243,19 @@ public:
         }  
     }  
 };
+
+// True
+class Solution {  
+public:  
+    bool hasPathSum(TreeNode* root, int targetSum) {  
+        if (root == nullptr)  
+            return false;  
+        if (root->left == nullptr && root->right == nullptr)  
+            return root->val == targetSum;  // 当前为叶子节点，查看是否匹配
+            // 左节点或者右节点有匹配成功则为True
+        return hasPathSum(root->left, targetSum - root->val) || hasPathSum(root->right, targetSum - root->val);  
+    }  
+};
 ```
 >[!warning]
 >注意路径为到叶子节点个数-> 所以需要遍历到叶子节点
@@ -288,3 +301,96 @@ public:
     }
 };
 ```
+
+### [236. 二叉树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
+- 树+递归
+```cpp
+// inferiror
+class Solution {  
+public:  
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {  
+        vector<TreeNode*> P, Q, temp;  
+        unordered_map<int, int> dire;   //在路径数组中找找最近的共同点 
+        path(root, p->val, P, temp);  
+        temp.clear();  
+        path(root, q->val, Q, temp);  
+        int l1 = 0, l2 = P.size() - 1;  
+        while (l1 < Q.size()) {  
+            dire[Q[l1]->val]++;  
+            l1++;  
+        }  
+        while (l2 > 0) {  
+            if (dire.count(P[l2]->val))  
+                return P[l2];  
+            l2--;  
+        }  
+        return P[l2];  
+    }  
+  
+    void path(TreeNode *root, int target, vector<TreeNode*> &res, vector<TreeNode*> &temp) {  
+        if (root == nullptr)  // 将树到节点的路径转化成数组
+            return;           
+        temp.push_back(root);  
+        if (root->val == target) {  
+            res = temp;  
+            return;  
+        }  
+        path(root->left, target, res, temp);  
+        path(root->right, target, res, temp);  
+        temp.pop_back();  
+    }  
+};
+
+// True
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    // 基准情况：如果 root 为空，或者 root 就是 p 或 q，直接返回 root
+    if (!root || root == p || root == q) 
+	    return root;
+    
+    // 递归在左子树中查找 p 或 q
+    TreeNode* left = lowestCommonAncestor(root->left, p, q);
+    
+    // 递归在右子树中查找 p 或 q
+    TreeNode* right = lowestCommonAncestor(root->right, p, q);
+    
+    // 如果 left 和 right 都不为空，说明 p 和 q 分别在当前节点的左右子树中，当前节点就是 LCA
+    if (left && right) 
+	    return root;
+    
+    // 否则，返回非空的一边（即 p 或 q 所在的分支）
+    return left ? left : right;
+}
+
+```
+
+### [102. 二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
+- 二叉树的遍历
+```cpp
+class Solution {  
+public:  
+    vector<vector<int>> levelOrder(TreeNode* root) {  
+        vector<vector<int>> res;  
+        if (root == nullptr)  
+            return res;  
+        queue<TreeNode*> que;  
+        que.push(root);  
+        int tag = 0;  
+        while (!que.empty()) {  
+            vector<int> temp;  
+            for (int i = que.size(); i > 0; i--) {  
+                TreeNode *te = que.front();  // 通过分析队列的大小进行数组分层
+                que.pop();  
+                temp.push_back(te->val);  
+                if (te->left != nullptr)  
+                    que.push(te->left);  
+                if (te->right != nullptr)  
+                    que.push(te->right);  
+            }  
+            res.push_back(temp);  
+        }  
+        return res;  
+    }  
+};
+```
+>[!note]
+>注意到当前队列的大小为下个数组元素的大小
