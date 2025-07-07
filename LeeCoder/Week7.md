@@ -113,3 +113,83 @@ string minWindow(string s, string t) {
     return len == INT_MAX ? "" : s.substr(start, len);
 }
 ```
+
+
+### [17. 电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
+- 回溯算法
+```cpp
+class Solution {  
+public:  
+    vector<string> letterCombinations(string digits) {  
+        vector<string> temp(10), res;  
+        if (digits.empty())  
+            return res;  
+        string tem;  
+        vector<int> dig;  
+        for (auto c : digits)  
+            dig.push_back(c - '0');  
+        int n = 0;  
+        temp[2] = "abc";     //构建数字到字母对应
+        temp[3] = "def";  
+        temp[4] = "ghi";  
+        temp[5] = "jkl";  
+        temp[6] = "mno";  
+        temp[7] = "pqrs";  
+        temp[8] = "tuv";  
+        temp[9] = "wxyz";  
+        backtrack(temp, dig, tem, n, res);  
+        return res;  
+    }  
+  
+    void backtrack(vector<string> &temp, vector<int> &dig, string &tem, int n, vector<string> &res) {  
+        if (tem.size() == dig.size()) {   //几个数字对应几个字母
+           res.push_back(tem);  
+            return;  
+        }  
+        for (int i = 0; i < temp[dig[n]].size(); i++) {  
+            tem.push_back(temp[dig[n]][i]);   
+            backtrack(temp, dig, tem, n + 1, res);  
+            tem.pop_back();  
+        }  
+    }  
+};
+
+// True
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) return {};  // 处理空输入
+
+        vector<string> temp(10);
+        temp[2] = "abc";
+        temp[3] = "def";
+        temp[4] = "ghi";
+        temp[5] = "jkl";
+        temp[6] = "mno";
+        temp[7] = "pqrs";
+        temp[8] = "tuv";
+        temp[9] = "wxyz";
+
+        vector<string> res;
+        string current;
+        backtrack(temp, digits, current, 0, res);
+        return res;
+    }
+
+    void backtrack(vector<string>& temp, string& digits, string& current, int n, vector<string>& res) {
+        if (n == digits.size()) {
+            res.push_back(current);
+            return;
+        }
+
+        int num = digits[n] - '0';  // 将字符 '2' 转为数字 2
+        for (char c : temp[num]) {
+            current.push_back(c);
+            backtrack(temp, digits, current, n + 1, res);
+            current.pop_back();
+        }
+    }
+};
+```
+>[!note]
+>字符到数字变化-> char - '0'
