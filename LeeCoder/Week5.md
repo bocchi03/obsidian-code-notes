@@ -222,7 +222,7 @@ public:
             return true;  
         vector<int> dp(n);  
         dp[0] = nums[0];  
-        for(int i = 1; i < n; i++){  
+        for(int i = 1; i < n; i++){                                     
             if(i > dp[i - 1])  
                 return false;  
             dp[i] = max(dp[i - 1], i + nums[i]);  //转移方程

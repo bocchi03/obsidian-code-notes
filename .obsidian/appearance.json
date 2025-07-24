@@ -1,8 +1,9 @@
 {
   "enabledCssSnippets": [
+    "新建 文本文档",
     "GitHub (2)"
   ],
-  "cssTheme": "GitHub Theme",
+  "cssTheme": "",
   "theme": "system",
   "monospaceFontFamily": "Consolas",
   "baseFontSize": 16,

@@ -1,7 +1,9 @@
 {
   "promptDelete": false,
-  "showLineNumber": true,
+  "showLineNumber": false,
   "readableLineLength": false,
   "vimMode": false,
-  "foldIndent": false
+  "foldIndent": false,
+  "attachmentFolderPath": "image",
+  "rightToLeft": false
 }

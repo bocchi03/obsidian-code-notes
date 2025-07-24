@@ -193,3 +193,103 @@ public:
 ```
 >[!note]
 >字符到数字变化-> char - '0'
+
+### [90. 子集 II](https://leetcode.cn/problems/subsets-ii/)
+- 回溯
+```cpp
+class Solution {  
+public:  
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {  
+        vector<vector<int>> res;  
+        vector<int> temp;  
+        sort(nums.begin(), nums.end());   // 排序+start 保证下次不会选择选过的元素 
+        int start = 0;  
+        backtrack(nums, res, temp, start);  
+        return res;  
+    }  
+  
+    void backtrack(vector<int> &nums, vector<vector<int>> &res, vector<int> temp, int start) {  
+        res.push_back(temp);  
+        for (int i = start; i < nums.size(); i++) {  
+            if (i > start && nums[i] == nums[i - 1])  // 相等元素一轮只能选一次
+                continue;  
+            temp.push_back(nums[i]);  
+            backtrack(nums, res, temp, i + 1);  
+            temp.pop_back();  
+        }  
+    }  
+};
+```
+>[!tip]
+>**我们需要限制相等元素在每一轮中只能被选择一次**。实现方式比较巧妙：由于数组是已排序的，因此相等元素都是相邻的。这意味着在某轮选择中，若当前元素与其左边元素相等，则说明它已经被选择过，因此直接跳过当前元素。
+>
+>
+>**本题规定每个数组元素只能被选择一次**。幸运的是，我们也可以利用变量 `start` 来满足该约束：当做出选择 xi 后，设定下一轮从索引 i+1 开始向后遍历。这样既能去除重复子集，也能避免重复选择元素。
+
+![[Pasted image 20250709203209.png]]
+
+### [424. 替换后的最长重复字符](https://leetcode.cn/problems/longest-repeating-character-replacement/)
+```cpp
+class Solution {  
+public:  
+    int characterReplacement(string s, int k) {  
+        unordered_map<char, int> windows;  
+        int left = 0, right = 0;  
+        int maxc = 0;  
+        int res = 0;  
+  
+        while (right < s.size()) {  
+            char c = s[right];  
+            right++;  
+            windows[c]++;  
+            maxc = max(maxc, windows[c]);  // 窗口内最大相同字符数
+  
+            while (right - left - maxc > k) {  // 当窗口大于k个不同加上最大相同字符
+                char d = s[left];              // 需要缩小窗口
+                windows[d]--;  
+                left++;  
+            }  
+            res = max(res, right - left);  
+        }  
+        return res;  
+    }  
+};
+```
+
+### [47. 全排列 II](https://leetcode.cn/problems/permutations-ii/)
+- 回溯
+```cpp
+class Solution {  
+public:  
+    vector<vector<int>> permuteUnique(vector<int>& nums) {  
+        vector<vector<int>> res;  
+        vector<int> temp;  
+        vector<bool> used(nums.size(), false);  
+        backtrack(used, nums, res, temp);  
+        return res;  
+    }  
+  
+    void backtrack(vector<bool> &used, vector<int> &nums, vector<vector<int>> &res, vector<int> &temp) {  
+        if (temp.size() == nums.size()) {  
+            res.push_back(temp);  
+            return;  
+        }  
+        unordered_set<int> duplicated;  
+        for (int i = 0; i < nums.size(); i++) {  // duplicated保证同轮内不会选相同
+            if (!used[i] && duplicated.find(nums[i]) == duplicated.end()) {  
+                duplicated.emplace(nums[i]);  
+                used[i] = true;  
+                temp.push_back(nums[i]);  
+                backtrack(used, nums, res, temp);  
+                used[i] = false;  
+                temp.pop_back();  
+            }  
+        }  
+    }  
+};
+```
+>[!note]
+>- **重复选择剪枝**：整个搜索过程中只有一个 `selected` 。它记录的是当前状态中包含哪些元素，其作用是避免某个元素在 `state` 中重复出现。
+>- **相等元素剪枝**：每轮选择（每个调用的 `backtrack` 函数）都包含一个 `duplicated` 。它记录的是在本轮遍历（`for` 循环）中哪些元素已被选择过，其作用是保证相等元素只被选择一次。
+
+![[Pasted image 20250711203101.png]]
