@@ -165,7 +165,7 @@ public:
 // 滑动窗口
 // 变长窗口
 int left = 0, right = 0;
-while(right < nums.size()){
+while (right < nums.size()) {
 	//增加窗口
 	sum += nums[right];
 	// 满足条件

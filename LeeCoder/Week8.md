@@ -64,3 +64,32 @@ public:
     }  
 };
 ```
+
+### [547. 省份数量](https://leetcode.cn/problems/number-of-provinces/)
+- DFS
+```cpp
+class Solution {  
+public:  
+    int findCircleNum(vector<vector<int>>& isConnected) {  
+        int rows = isConnected.size();  
+        vector<bool> visted(rows, false);  // 已遍历过的城市
+        int provinces = 0;  
+  
+        for (int i = 0; i < rows; i++){  
+            if (!visted[i]) {  
+                provinces++;  
+                DFS(isConnected, visted, i);  // 遍历和该城市相邻的城市
+            }  
+        }  
+        return provinces;  
+    }  
+  
+    void DFS(vector<vector<int>> &isConnected, vector<bool> &visted, int i) { 
+        visted[i] = true;  
+        for (int j = 0; j < isConnected.size(); j++){  
+            if (isConnected[i][j] == 1 && !visted[j])  
+                DFS(isConnected, visted, j);  
+        }  
+    }  
+};
+```
