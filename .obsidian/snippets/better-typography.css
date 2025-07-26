@@ -1,0 +1,157 @@
+/* === Obsidian 阅读与编辑模式排版优化 === */
+
+/* ================== 公共设置（编辑 + 预览） ================== */
+body {
+    --font-size-normal: 16px;
+    --line-height-normal: 1.8;
+    --text-width: 800px;
+    --paragraph-spacing: 1.2em;
+  }
+  
+  /* ================== 预览模式优化 ================== */
+  .markdown-reading-view, .markdown-preview-view {
+    font-size: var(--font-size-normal);
+    line-height: var(--line-height-normal);
+    max-width: var(--text-width);
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .markdown-preview-view p,
+  .markdown-reading-view p {
+    margin-bottom: var(--paragraph-spacing);
+  }
+  
+  .markdown-preview-view h1,
+  .markdown-reading-view h1 {
+    font-size: 1.8em;
+    margin: 1.5em 0 0.8em;
+  }
+  
+  .markdown-preview-view h2,
+  .markdown-reading-view h2 {
+    font-size: 1.6em;
+    margin: 1.2em 0 0.6em;
+  }
+  
+  .markdown-preview-view h3,
+  .markdown-reading-view h3 {
+    font-size: 1.4em;
+    margin: 1em 0 0.5em;
+  }
+  
+  .markdown-preview-view ul li,
+  .markdown-preview-view ol li,
+  .markdown-reading-view ul li,
+  .markdown-reading-view ol li {
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+  }
+  
+  .markdown-preview-view blockquote,
+  .markdown-reading-view blockquote {
+    font-style: italic;
+    color: #555;
+    border-left: 4px solid #ccc;
+    padding-left: 1em;
+    margin: 1em 0;
+    background-color: #f9f9f9;
+  }
+  
+  .markdown-preview-view code,
+  .markdown-preview-view pre,
+  .markdown-reading-view code,
+  .markdown-reading-view pre {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .markdown-preview-view table,
+  .markdown-reading-view table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+  }
+  
+  .markdown-preview-view table th,
+  .markdown-preview-view table td,
+  .markdown-reading-view table th,
+  .markdown-reading-view table td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+  }
+  
+  .markdown-preview-view img,
+  .markdown-reading-view img {
+    display: block;
+    margin: 1em auto;
+    max-width: 100%;
+  }
+  
+  /* ================== 编辑模式优化 ================== */
+  .cm-s-obsidian {
+    font-size: var(--font-size-normal);
+    line-height: var(--line-height-normal);
+    max-width: var(--text-width);
+    margin: auto;
+    padding: 20px;
+  }
+  
+  /* 段落（每行） */
+  .cm-line {
+    padding-bottom: 0.3em;
+  }
+  
+  /* 标题样式 */
+  .cm-header-1 {
+    font-size: 1.8em;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+  }
+  .cm-header-2 {
+    font-size: 1.6em;
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+  }
+  .cm-header-3 {
+    font-size: 1.4em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+  
+  /* 引用样式 */
+  .cm-quote {
+    font-style: italic;
+    color: #666;
+    background-color: #f8f8f8;
+    border-left: 4px solid #ccc;
+    padding-left: 1em;
+  }
+  
+  /* 列表项 */
+  .cm-formatting-list,
+  .cm-list-1, .cm-list-2, .cm-list-3 {
+    padding-left: 0.5em;
+    line-height: 1.6;
+  }
+  
+  /* 代码块和内联代码 */
+  .cm-inline-code {
+    background-color: #f6f8fa;
+    color: #e01e5a;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.95em;
+  }
+  
+  .HyperMD-codeblock {
+    background-color: #f6f8fa;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 1px solid #d1d5da;
+    color: #333;
+  }

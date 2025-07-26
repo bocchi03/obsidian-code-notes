@@ -1,0 +1,103 @@
+/* ===== 全局基础样式 ===== */
+:root {
+  --code-bg: #f6f8fa;       /* GitHub 代码块背景色 */
+  --code-text: #24292e;     /* GitHub 代码文本色 */
+  --code-border: #d1d5da;   /* GitHub 代码边框色 */
+  --code-font: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* ===== 1. 代码块样式统一（编辑/阅读模式）===== */
+/* 预览模式代码块 */
+.markdown-preview-view pre code,
+.markdown-reading-view pre code {
+  display: block;
+  padding: 1em;
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  font-family: var(--code-font);
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 6px;
+  border: 1px solid var(--code-border);
+  overflow: auto;
+  white-space: pre;
+}
+
+/* 编辑模式代码块 */
+.cm-s-obsidian .HyperMD-codeblock,
+.cm-s-obsidian .cm-inline-code {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  font-family: var(--code-font);
+  font-size: 14px;
+  border: 1px solid var(--code-border);
+  border-radius: 6px;
+  padding: 0.5em;
+  line-height: 1.5;
+}
+
+/* 行内代码 */
+.cm-s-obsidian span.cm-inline-code,
+.markdown-preview-view code:not(pre code),
+.markdown-reading-view code:not(pre code) {
+  background: var(--code-bg) !important;
+  color: var(--code-text) !important;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--code-border);
+  font-size: 13px;
+}
+
+/* ===== 2. 语法高亮颜色（GitHub 风格）===== */
+.cm-keyword, .token.keyword { color: #d73a49; }      /* 关键字红色 */
+.cm-string, .token.string { color: #032f62; }        /* 字符串深蓝 */
+.cm-number, .token.number { color: #005cc5; }         /* 数字蓝色 */
+.cm-comment, .token.comment { color: #6a737d; }      /* 注释灰色 */
+.cm-def, .token.function { color: #6f42c1; }         /* 函数紫色 */
+.cm-operator, .token.operator { color: #d73a49; }    /* 操作符红色 */
+
+/* ===== 3. 隐藏所有参考线 ===== */
+/* 缩进参考线 */
+.cm-indent::before,
+.markdown-preview-view .cm-indent::before {
+  content: none !important;
+}
+
+/* 任务列表竖线 */
+.task-list-item {
+  border-left: none !important;
+}
+
+/* 表格边框（编辑模式） */
+.cm-table-widget {
+  border: none !important;
+}
+
+/* 表格边框（阅读模式） */
+.markdown-preview-view table {
+  border-collapse: collapse;
+}
+.markdown-preview-view th,
+.markdown-preview-view td {
+  border: none !important;
+}
+
+/* 代码块左侧参考线 */
+.cm-line .cm-code-indent {
+  background: none !important;
+}
+
+/* 块引用（Blockquote）左侧竖线 */
+.markdown-preview-view blockquote,
+.cm-blockquote {
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+
+/* ===== 4. 强制阅读模式使用编辑模式样式 ===== */
+.markdown-reading-view {
+  font-family: var(--font-text);
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-normal);
+  max-width: none !important;
+}

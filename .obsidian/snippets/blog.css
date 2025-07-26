@@ -1,0 +1,62 @@
+/* 博客风格的代码块（编辑模式和预览模式通用） */
+.cm-s-obsidian pre.HyperMD-codeblock, 
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-codeblock,
+.markdown-preview-view pre code {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid #333;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* 编辑模式下的内联代码 */
+.cm-inline-code {
+  background-color: #2d2d2d !important;
+  color: #d4d4d4 !important;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+}
+
+/* 语法高亮：针对常见语言关键字 */
+.cm-keyword,
+.token.keyword {
+  color: #569cd6;
+}
+
+.cm-def,
+.token.function {
+  color: #dcdcaa;
+}
+
+.cm-variable,
+.token.variable {
+  color: #9cdcfe;
+}
+
+.cm-string,
+.token.string {
+  color: #ce9178;
+}
+
+.cm-number,
+.token.number {
+  color: #b5cea8;
+}
+
+.cm-comment,
+.token.comment {
+  color: #6a9955;
+  font-style: italic;
+}
+
+.cm-operator,
+.token.operator {
+  color: #d4d4d4;
+}
