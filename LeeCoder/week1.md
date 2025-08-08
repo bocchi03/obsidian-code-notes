@@ -1,6 +1,6 @@
 ## [1. 两数之和](https://leetcode.cn/problems/two-sum/)
 - 排序+哈希表+结构体（键值对）
-```c++
+```cpp
 vector<int> res;  
 vector<pair<int, int>> dire;  
 // 结构体(原数+下标)

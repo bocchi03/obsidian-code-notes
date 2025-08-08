@@ -104,7 +104,7 @@ string minWindow(string s, string t) {
             left++;
             if (need.count(d)) {
                 if (window[d] == need[d]) valid--;  // 缩小后失去一个满足条件的字符
-                window[d]--;
+                window[d]--;               
             }
         }
     }
