@@ -1,0 +1,208 @@
+我明白了你的需求：内容居中对齐，并且与左右两侧保持一定距离（不贴边），同时让垂直滚动条紧贴右侧边缘。
+这可以通过调整 CSS 中的 max-width 和 padding 来实现。我将为你修改 CSS 代码，使其满足这些要求。
+下面是修改后的完整 CSS 代码：
+/* ========= 基础排版优化 ========= */
+body {
+  --font-default: "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-monospace: "Fira Code", monospace;
+  font-family: var(--font-default);
+  line-height: 1.8;
+  font-size: 16px;
+  max-width: 800px;
+  margin: auto;
+  padding: 2em;
+}
+
+/* ========= 页面居中 & 左右边距 ========= */
+.markdown-source-view,
+.markdown-preview-view,
+.markdown-reading-view {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* 禁止编辑区域贴边 */
+.markdown-source-view.is-readable-line-width .cm-contentContainer {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* 编辑 & 阅读模式统一 */
+.markdown-source-view,
+.markdown-preview-view {
+  line-height: 1.8;
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+/* ========= 标题间距优化 ========= */
+h1, h2, h3, h4,
+.markdown-preview-view h1, .markdown-source-view h1,
+.markdown-preview-view h2, .markdown-source-view h2,
+.markdown-preview-view h3, .markdown-source-view h3,
+.markdown-preview-view h4, .markdown-source-view h4 {
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+  line-height: 1.4;
+}
+
+h1, .markdown-preview-view h1, .markdown-source-view h1 {
+  font-size: 2em;
+  border-bottom: 2px solid var(--text-accent);
+  padding-bottom: 0.3em;
+}
+
+h2, .markdown-preview-view h2, .markdown-source-view h2 {
+  font-size: 1.6em;
+  border-left: 4px solid var(--text-accent);
+  padding-left: 0.6em;
+}
+
+h3, .markdown-preview-view h3, .markdown-source-view h3 {
+  font-size: 1.3em;
+  color: var(--text-muted);
+}
+
+/* ========= 段落 & 列表间距提升 ========= */
+p {
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+ul, ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+ul li, ol li {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+ul li::marker {
+  content: "• ";
+  color: var(--text-accent);
+}
+
+/* ========= 引用块美化 & 隐藏左侧竖线 ========= */
+blockquote,
+.markdown-preview-view blockquote,
+.markdown-source-view blockquote,
+.markdown-reading-view blockquote,
+.cm-blockquote {
+  border-left: none !important;
+  padding-left: 0 !important;
+  background-color: var(--background-secondary);
+  color: var(--text-muted);
+  margin: 1.5em 0;
+}
+
+/* ========= 代码块更清晰 (GitHub 风格) ========= */
+/* 公共字体 */
+code, pre, .cm-s-obsidian span.cm-inline-code {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+}
+
+/* 预览模式代码块样式 */
+.markdown-preview-view pre code,
+.markdown-reading-view pre code {
+  display: block;
+  padding: 1em;
+  background: #f6f8fa !important;
+  color: #24292e !important;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: auto;
+  border-radius: 6px;
+  border: 1px solid #d1d5da;
+  white-space: pre;
+}
+
+/* 编辑模式代码块样式 */
+.cm-s-obsidian .HyperMD-codeblock {
+  background: #f6f8fa !important;
+  color: #24292e !important;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  padding: 1em;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 行内代码样式 */
+.markdown-preview-view code:not(pre code),
+.markdown-reading-view code:not(pre code),
+.cm-inline-code,
+.cm-s-obsidian span.cm-inline-code {
+  background-color: #f6f8fa !important;
+  color: #24292e !important;
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+  border: 1px solid #d1d5da;
+  font-size: 14px;
+}
+
+/* GitHub 语法高亮颜色 */
+.cm-keyword, .token.keyword { color: #569cd6; }
+.cm-def, .token.function { color: #000000; }
+.cm-variable, .token.variable { color: #030405; }
+.cm-string, .token.string { color: #ce9178; }
+.cm-number, .token.number { color: #569cd6; }
+.cm-comment, .token.comment {
+  color: #6a9955;
+  font-style: italic;
+}
+.cm-operator, .token.operator { color: #569cd6; }
+
+/* ========= 表格美化 ========= */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+}
+
+th, td {
+  border: 1px solid var(--background-modifier-border);
+  padding: 0.75em;
+  text-align: left;
+}
+
+/* ========= 图片居中 & 边距 ========= */
+img {
+  display: block;
+  margin: 2em auto;
+  max-width: 100%;
+}
+
+/* ========= 链接样式优化 ========= */
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ========= 任务列表增强 ========= */
+input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+/* 隐藏任务列表参考线 */
+.task-list-item {
+  border-left: none !important;
+}
+
+/* ========= 隐藏参考线 ========= */
+.cm-indent::before,
+.markdown-preview-view .cm-indent::before,
+.cm-line .cm-code-indent {
+  content: none !important;
+  background: none !important;
+}
+
